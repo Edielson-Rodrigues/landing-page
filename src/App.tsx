@@ -1,9 +1,9 @@
-import { ChevronDown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
 import { Footer } from './components/footer';
 import { Language } from './components/language-toggle/interface';
 import { Navbar } from './components/nav-bar';
+import { ScrollToTop } from './components/scroll-to-top';
 import {
   AboutSection,
   ContactSection,
@@ -218,12 +218,7 @@ function App() {
       />
 
       {/* Scroll to Top Button */}
-      <button
-        onClick={() => scrollToSection('home')}
-        className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 hover:scale-110"
-      >
-        <ChevronDown className="rotate-180" size={24} />
-      </button>
+      <ScrollToTop onClick={() => scrollToSection('home')} />
     </div>
   );
 }
