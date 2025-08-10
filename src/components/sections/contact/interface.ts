@@ -28,5 +28,4 @@ export type ContactSectionProps = {
   socialMedia: string;
   info: ContactInfo;
   form: ContactForm;
-  onFormSubmit: (formData: any) => void;
 };

@@ -1,25 +1,44 @@
 import { Mail, Phone, MapPin, Linkedin, Github, Send } from 'lucide-react';
 import React, { useState } from 'react';
 
+// todo: Create paths
+import { supabase } from '../../../lib/supabase';
+
 import { ContactSectionProps, FormData } from './interface';
 
-export const ContactSection: React.FC<ContactSectionProps> = ({
-  title,
-  subtitle,
-  socialMedia,
-  info,
-  form,
-  onFormSubmit,
-}) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({ title, subtitle, socialMedia, info, form }) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onFormSubmit(formData);
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setLoading(true);
+
+    const { error } = await supabase.from('contact_messages').insert([
+      {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      },
+    ]);
+
+    setLoading(false);
+
+    if (error) {
+      console.error(error);
+      setErrorMsg('Erro ao enviar mensagem. Tente novamente.');
+      return;
+    }
+
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
@@ -141,12 +160,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 ></textarea>
               </div>
 
+              {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
+              {successMsg && <p className="text-green-500 text-sm">{successMsg}</p>}
+
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all flex items-center justify-center space-x-2"
+                disabled={loading}
+                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
               >
                 <Send size={20} />
-                <span>{form.send}</span>
+                <span>{loading ? 'Enviando...' : form.send}</span>
               </button>
             </form>
           </div>
