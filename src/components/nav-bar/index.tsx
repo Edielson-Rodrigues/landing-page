@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="font-bold text-xl text-gray-900 dark:text-white cursor-pointer"
             onClick={() => onNavClick('home')}
           >
-            MyPortfolio
+            Edielson Rodrigues
           </div>
 
           {/* Desktop Menu */}

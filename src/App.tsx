@@ -20,11 +20,6 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [language, setLanguage] = useLocalStorage<Language>('language', Language.PT);
   const [theme, setTheme] = useLocalStorage<Theme>('theme', Theme.LIGHT);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
 
   // eslint-disable-next-line security/detect-object-injection
   const t = translations[language];
@@ -62,13 +57,6 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
-  };
-
-  const handleFormSubmit = (e: React.FormEvent): void => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert(t.contact.form.successMessage);
-    setFormData({ name: '', email: '', message: '' });
   };
 
   const navItems = [
@@ -121,7 +109,14 @@ function App() {
         theme={theme}
         onThemeChange={setTheme}
         downloadLabel={t.buttons.downloadCV}
-        onDownloadClick={() => console.log('Download CV')} // TODO: implement download functionality
+        onDownloadClick={() => {
+          const link = document.createElement('a');
+          link.href = '/attachments/resume.pdf';
+          link.download = 'resume.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }}
       />
 
       {/* Hero Section */}
@@ -189,7 +184,6 @@ function App() {
         socialMedia={t.contact.socialMedia}
         info={t.contact.info}
         form={t.contact.form}
-        onFormSubmit={handleFormSubmit}
       />
 
       {/* Footer */}
