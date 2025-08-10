@@ -1,9 +1,9 @@
-import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, Briefcase, Send, ChevronDown } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Send, ChevronDown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
 import { Language } from './components/language-toggle/interface';
 import { Navbar } from './components/nav-bar';
-import { AboutSection, ExperienceSection, HeroSection } from './components/sections';
+import { AboutSection, ExperienceSection, HeroSection, PortfolioSection, SkillsSection } from './components/sections';
 import { Theme } from './components/theme-toggle/interface';
 import { useLocalStorage } from './hooks/use-local-storage';
 import { translations } from './translations';
@@ -162,105 +162,17 @@ function App() {
       />
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.skills.title}</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">{t.skills.subtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {t.skills.categories.map((skillGroup, index) => (
-              <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{skillGroup.category}</h3>
-
-                <div className="space-y-4 mb-6">
-                  {skillGroup.items.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="inline-block bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg font-medium mr-2 mb-2 shadow-sm"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6">
-                  <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
-                    <span>{t.skills.proficiencyLevel}</span>
-                    <span>{skillGroup.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-1000"
-                      style={{ width: `${skillGroup.level}%` }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SkillsSection
+        title={t.skills.title}
+        subtitle={t.skills.subtitle}
+        categories={t.skills.categories.map((cat: any) => ({
+          category: cat.category,
+          items: cat.items,
+        }))}
+      />
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.portfolio.title}</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">{t.portfolio.subtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolio.map((project, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="flex space-x-4">
-                      <a
-                        href={project.liveUrl}
-                        className="bg-white/90 p-2 rounded-full hover:bg-white transition-colors"
-                      >
-                        <ExternalLink className="text-gray-900" size={20} />
-                      </a>
-                      <a
-                        href={project.githubUrl}
-                        className="bg-white/90 p-2 rounded-full hover:bg-white transition-colors"
-                      >
-                        <Github className="text-gray-900" size={20} />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PortfolioSection title={t.portfolio.title} subtitle={t.portfolio.subtitle} projects={portfolio} />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
