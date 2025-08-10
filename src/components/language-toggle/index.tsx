@@ -2,7 +2,7 @@ import { Globe } from 'lucide-react';
 
 import { Language, LanguageToggleProps } from './interface';
 
-const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, onLanguageChange }) => {
+export const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, onLanguageChange }) => {
   return (
     <div className="relative">
       <button
@@ -16,5 +16,3 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, onLanguageCha
     </div>
   );
 };
-
-export { LanguageToggle };

@@ -13,9 +13,9 @@ export type NavbarProps = {
   onToggleMenu: () => void;
   onNavClick: (sectionId: string) => void;
   language: Language;
-  onLanguageChange: (lang: string) => void;
+  onLanguageChange: (lang: Language) => void;
   theme: Theme;
-  onThemeChange: (theme: string) => void;
+  onThemeChange: (theme: Theme) => void;
   downloadLabel: string;
   onDownloadClick: () => void;
 };

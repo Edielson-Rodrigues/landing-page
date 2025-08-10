@@ -8,13 +8,12 @@ import {
   Award,
   BookOpen,
   Briefcase,
-  Code,
   Send,
   ChevronDown,
-  Star,
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
+import { HeroSection } from './components/hero-section';
 import { Language } from './components/language-toggle/interface';
 import { Navbar } from './components/nav-bar';
 import { Theme } from './components/theme-toggle/interface';
@@ -127,73 +126,21 @@ function App() {
         theme={theme}
         onThemeChange={setTheme}
         downloadLabel={t.buttons.downloadCV}
-        onDownloadClick={() => console.log('Download CV')}
+        onDownloadClick={() => console.log('Download CV')} // TODO: implement download functionality
       />
 
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
-                  {t.hero.greeting}{' '}
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    {t.hero.name}
-                  </span>
-                </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">{t.hero.description}</p>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <button
-                  onClick={() => scrollToSection('portfolio')}
-                  className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 flex items-center space-x-2"
-                >
-                  <span>{t.hero.viewPortfolio}</span>
-                  <ExternalLink size={16} />
-                </button>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg font-medium hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
-                >
-                  {t.hero.getInTouch}
-                </button>
-              </div>
-
-              <div className="flex items-center space-x-6 text-gray-600 dark:text-gray-400">
-                <a
-                  href={`mailto:${t.contact.info.email}`}
-                  className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <Mail size={20} />
-                  <span>{t.contact.info.email}</span>
-                </a>
-                <a
-                  href={`tel:${t.contact.info.phone}`}
-                  className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <Phone size={20} />
-                  <span>{t.contact.info.phone}</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:flex justify-center">
-              <div className="relative">
-                <div className="w-80 h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                  <div className="w-72 h-72 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
-                    <Code size={120} className="text-blue-600" />
-                  </div>
-                </div>
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-orange-400 rounded-full flex items-center justify-center animate-bounce">
-                  <Star className="text-white" size={32} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        greeting={t.hero.greeting}
+        name={t.hero.name}
+        description={t.hero.description}
+        viewPortfolioLabel={t.hero.viewPortfolio}
+        getInTouchLabel={t.hero.getInTouch}
+        email={t.contact.info.email}
+        phone={t.contact.info.phone}
+        onViewPortfolio={() => scrollToSection('portfolio')}
+        onGetInTouch={() => scrollToSection('contact')}
+      />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">

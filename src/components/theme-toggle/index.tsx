@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Theme, ThemeToggleProps } from './interface';
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, onThemeChange }) => {
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, onThemeChange }) => {
   return (
     <button
       onClick={() => onThemeChange(theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)}
@@ -14,5 +14,3 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, onThemeChange }) => {
     </button>
   );
 };
-
-export { ThemeToggle };

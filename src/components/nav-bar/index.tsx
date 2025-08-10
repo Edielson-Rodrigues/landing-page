@@ -6,7 +6,7 @@ import { ThemeToggle } from '../theme-toggle';
 
 import { NavbarProps } from './interface';
 
-const Navbar: React.FC<NavbarProps> = ({
+export const Navbar: React.FC<NavbarProps> = ({
   navItems,
   activeSection,
   isMenuOpen,
@@ -105,5 +105,3 @@ const Navbar: React.FC<NavbarProps> = ({
     </nav>
   );
 };
-
-export { Navbar };
