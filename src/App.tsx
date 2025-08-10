@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Footer } from './components/footer';
 import { Language } from './components/language-toggle/interface';
@@ -15,6 +15,7 @@ import {
 import { Theme } from './components/theme-toggle/interface';
 import { useLocalStorage } from './hooks/use-local-storage';
 import { translations } from './translations';
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -22,7 +23,7 @@ function App() {
   const [theme, setTheme] = useLocalStorage<Theme>('theme', Theme.LIGHT);
 
   // eslint-disable-next-line security/detect-object-injection
-  const t = translations[language];
+  const translation = translations[language];
 
   useEffect(() => {
     // Apply theme to document
@@ -60,36 +61,37 @@ function App() {
   };
 
   const navItems = [
-    { id: 'home', label: t.nav.home },
-    { id: 'about', label: t.nav.about },
-    { id: 'experience', label: t.nav.experience },
-    { id: 'skills', label: t.nav.skills },
-    { id: 'portfolio', label: t.nav.portfolio },
-    { id: 'contact', label: t.nav.contact },
+    { id: 'home', label: translation.nav.home },
+    { id: 'about', label: translation.nav.about },
+    { id: 'experience', label: translation.nav.experience },
+    { id: 'skills', label: translation.nav.skills },
+    { id: 'portfolio', label: translation.nav.portfolio },
+    { id: 'contact', label: translation.nav.contact },
   ];
 
+  // TODO: Pass this to supabase
   const portfolio = [
     {
-      title: t.portfolio.projects[0].title,
-      description: t.portfolio.projects[0].description,
+      title: translation.portfolio.projects[0].title,
+      description: translation.portfolio.projects[0].description,
       image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: t.portfolio.projects[0].technologies,
+      technologies: translation.portfolio.projects[0].technologies,
       liveUrl: '#',
       githubUrl: '#',
     },
     {
-      title: t.portfolio.projects[1].title,
-      description: t.portfolio.projects[1].description,
+      title: translation.portfolio.projects[1].title,
+      description: translation.portfolio.projects[1].description,
       image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: t.portfolio.projects[1].technologies,
+      technologies: translation.portfolio.projects[1].technologies,
       liveUrl: '#',
       githubUrl: '#',
     },
     {
-      title: t.portfolio.projects[2].title,
-      description: t.portfolio.projects[2].description,
+      title: translation.portfolio.projects[2].title,
+      description: translation.portfolio.projects[2].description,
       image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: t.portfolio.projects[2].technologies,
+      technologies: translation.portfolio.projects[2].technologies,
       liveUrl: '#',
       githubUrl: '#',
     },
@@ -108,7 +110,7 @@ function App() {
         onLanguageChange={setLanguage}
         theme={theme}
         onThemeChange={setTheme}
-        downloadLabel={t.buttons.downloadCV}
+        downloadLabel={translation.buttons.downloadCV}
         onDownloadClick={() => {
           const link = document.createElement('a');
           link.href = '/attachments/resume.pdf';
@@ -121,41 +123,41 @@ function App() {
 
       {/* Hero Section */}
       <HeroSection
-        greeting={t.hero.greeting}
-        name={t.hero.name}
-        description={t.hero.description}
-        viewPortfolioLabel={t.hero.viewPortfolio}
-        getInTouchLabel={t.hero.getInTouch}
-        email={t.contact.info.email}
-        phone={t.contact.info.phone}
+        greeting={translation.hero.greeting}
+        name={translation.hero.name}
+        description={translation.hero.description}
+        viewPortfolioLabel={translation.hero.viewPortfolio}
+        getInTouchLabel={translation.hero.getInTouch}
+        email={translation.contact.info.email}
+        phone={translation.contact.info.phone}
         onViewPortfolio={() => scrollToSection('portfolio')}
         onGetInTouch={() => scrollToSection('contact')}
       />
 
       {/* About Section */}
       <AboutSection
-        title={t.about.title}
-        subtitle={t.about.subtitle}
-        description1={t.about.description1}
-        description2={t.about.description2}
-        projectsCompletedLabel={t.about.projectsCompleted}
+        title={translation.about.title}
+        subtitle={translation.about.subtitle}
+        description1={translation.about.description1}
+        description2={translation.about.description2}
+        projectsCompletedLabel={translation.about.projectsCompleted}
         projectsCompletedValue="10+"
-        yearsExperienceLabel={t.about.yearsExperience}
+        yearsExperienceLabel={translation.about.yearsExperience}
         yearsExperienceValue="2+"
-        educationTitle={t.about.education.title}
+        educationTitle={translation.about.education.title}
         educationItems={[
-          { degree: t.about.education.degree, institution: t.about.education.university },
-          { degree: t.about.education.specialization, institution: t.about.education.institution },
+          { degree: translation.about.education.degree, institution: translation.about.education.university },
+          { degree: translation.about.education.specialization, institution: translation.about.education.institution },
         ]}
-        certificationsTitle={t.about.certifications.title}
-        certifications={t.about.certifications.items}
+        certificationsTitle={translation.about.certifications.title}
+        certifications={translation.about.certifications.items}
       />
 
       {/* Experience Section */}
       <ExperienceSection
-        title={t.experience.title}
-        subtitle={t.experience.subtitle}
-        items={t.experience.items.map((exp: any) => ({
+        title={translation.experience.title}
+        subtitle={translation.experience.subtitle}
+        items={translation.experience.items.map((exp: any) => ({
           title: exp.title,
           company: exp.company,
           period: exp.period,
@@ -166,32 +168,36 @@ function App() {
 
       {/* Skills Section */}
       <SkillsSection
-        title={t.skills.title}
-        subtitle={t.skills.subtitle}
-        categories={t.skills.categories.map((cat: any) => ({
+        title={translation.skills.title}
+        subtitle={translation.skills.subtitle}
+        categories={translation.skills.categories.map((cat: any) => ({
           category: cat.category,
           items: cat.items,
         }))}
       />
 
       {/* Portfolio Section */}
-      <PortfolioSection title={t.portfolio.title} subtitle={t.portfolio.subtitle} projects={portfolio} />
+      <PortfolioSection
+        title={translation.portfolio.title}
+        subtitle={translation.portfolio.subtitle}
+        projects={portfolio}
+      />
 
       {/* Contact Section */}
       <ContactSection
-        title={t.contact.title}
-        subtitle={t.contact.subtitle}
-        socialMedia={t.contact.socialMedia}
-        info={t.contact.info}
-        form={t.contact.form}
+        title={translation.contact.title}
+        subtitle={translation.contact.subtitle}
+        socialMedia={translation.contact.socialMedia}
+        info={translation.contact.info}
+        form={translation.contact.form}
       />
 
       {/* Footer */}
       <Footer
-        name={t.hero.name}
-        description={t.footer.description}
-        rights={t.footer.rights}
-        email={t.contact.info.email}
+        name={translation.hero.name}
+        description={translation.footer.description}
+        rights={translation.footer.rights}
+        email={translation.contact.info.email}
         socialLinks={[
           {
             href: 'https://www.linkedin.com/in/edielson-rodrigues',
@@ -204,7 +210,7 @@ function App() {
             icon: 'github',
           },
           {
-            href: `mailto:${t.contact.info.email}`,
+            href: `mailto:${translation.contact.info.email}`,
             label: 'Email',
             icon: 'email',
           },
