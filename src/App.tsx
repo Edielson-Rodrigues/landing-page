@@ -1,26 +1,12 @@
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Github,
-  ExternalLink,
-  Award,
-  BookOpen,
-  Briefcase,
-  Send,
-  ChevronDown,
-} from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, Briefcase, Send, ChevronDown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
-import { AboutSection } from './components/about-section';
-import { HeroSection } from './components/hero-section';
 import { Language } from './components/language-toggle/interface';
 import { Navbar } from './components/nav-bar';
+import { AboutSection, ExperienceSection, HeroSection } from './components/sections';
 import { Theme } from './components/theme-toggle/interface';
 import { useLocalStorage } from './hooks/use-local-storage';
 import { translations } from './translations';
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -163,47 +149,17 @@ function App() {
       />
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.experience.title}</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">{t.experience.subtitle}</p>
-          </div>
-
-          <div className="space-y-8">
-            {t.experience.items.map((exp, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{exp.title}</h3>
-                    <p className="text-lg text-blue-600 dark:text-blue-400 font-medium">{exp.company}</p>
-                  </div>
-                  <div className="flex items-center text-gray-500 dark:text-gray-400 mt-2 md:mt-0">
-                    <Briefcase className="mr-2" size={20} />
-                    <span className="font-medium">{exp.period}</span>
-                  </div>
-                </div>
-
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">{exp.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ExperienceSection
+        title={t.experience.title}
+        subtitle={t.experience.subtitle}
+        items={t.experience.items.map((exp: any) => ({
+          title: exp.title,
+          company: exp.company,
+          period: exp.period,
+          description: exp.description,
+          technologies: exp.technologies,
+        }))}
+      />
 
       {/* Skills Section */}
       <section id="skills" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
