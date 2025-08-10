@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
+import { AboutSection } from './components/about-section';
 import { HeroSection } from './components/hero-section';
 import { Language } from './components/language-toggle/interface';
 import { Navbar } from './components/nav-bar';
@@ -143,65 +144,23 @@ function App() {
       />
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.about.title}</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">{t.about.subtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{t.about.description1}</p>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{t.about.description2}</p>
-
-              <div className="grid grid-cols-2 gap-6 pt-6">
-                <div className="text-center p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">15+</div>
-                  <div className="text-gray-700 dark:text-gray-300">{t.about.projectsCompleted}</div>
-                </div>
-                <div className="text-center p-6 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">2+</div>
-                  <div className="text-gray-700 dark:text-gray-300">{t.about.yearsExperience}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                  <BookOpen className="mr-3 text-blue-600 dark:text-blue-400" size={24} />
-                  {t.about.education.title}
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-900 dark:text-white">{t.about.education.degree}</h4>
-                    <p className="text-gray-600 dark:text-gray-400">{t.about.education.university}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900 dark:text-white">{t.about.education.specialization}</h4>
-                    <p className="text-gray-600 dark:text-gray-400">{t.about.education.institution}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                  <Award className="mr-3 text-green-600 dark:text-green-400" size={24} />
-                  {t.about.certifications.title}
-                </h3>
-                <div className="space-y-2">
-                  {t.about.certifications.items.map((cert, index) => (
-                    <p key={index} className="text-gray-700 dark:text-gray-300">
-                      • {cert}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutSection
+        title={t.about.title}
+        subtitle={t.about.subtitle}
+        description1={t.about.description1}
+        description2={t.about.description2}
+        projectsCompletedLabel={t.about.projectsCompleted}
+        projectsCompletedValue="10+"
+        yearsExperienceLabel={t.about.yearsExperience}
+        yearsExperienceValue="2+"
+        educationTitle={t.about.education.title}
+        educationItems={[
+          { degree: t.about.education.degree, institution: t.about.education.university },
+          { degree: t.about.education.specialization, institution: t.about.education.institution },
+        ]}
+        certificationsTitle={t.about.certifications.title}
+        certifications={t.about.certifications.items}
+      />
 
       {/* Experience Section */}
       <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
