@@ -1,6 +1,7 @@
-import { Mail, Linkedin, Github, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
+import { Footer } from './components/footer';
 import { Language } from './components/language-toggle/interface';
 import { Navbar } from './components/nav-bar';
 import {
@@ -192,42 +193,29 @@ function App() {
       />
 
       {/* Footer */}
-      <footer className="bg-gray-900 dark:bg-black text-white py-12 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4">{t.hero.name}</h3>
-            <p className="text-gray-400 mb-8">{t.footer.description}</p>
-
-            <div className="flex justify-center space-x-6 mb-8">
-              <a
-                href="https://www.linkedin.com/in/edielson-rodrigues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Linkedin size={24} />
-              </a>
-              <a
-                href="https://github.com/Edielson-Rodrigues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Github size={24} />
-              </a>
-              <a href={`mailto:${t.contact.info.email}`} className="text-gray-400 hover:text-white transition-colors">
-                <Mail size={24} />
-              </a>
-            </div>
-
-            <div className="border-t border-gray-800 pt-8">
-              <p className="text-gray-500">
-                © 2025 {t.hero.name}. {t.footer.rights}
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer
+        name={t.hero.name}
+        description={t.footer.description}
+        rights={t.footer.rights}
+        email={t.contact.info.email}
+        socialLinks={[
+          {
+            href: 'https://www.linkedin.com/in/edielson-rodrigues',
+            label: 'LinkedIn',
+            icon: 'linkedin',
+          },
+          {
+            href: 'https://github.com/Edielson-Rodrigues',
+            label: 'GitHub',
+            icon: 'github',
+          },
+          {
+            href: `mailto:${t.contact.info.email}`,
+            label: 'Email',
+            icon: 'email',
+          },
+        ]}
+      />
 
       {/* Scroll to Top Button */}
       <button
