@@ -31,24 +31,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex w-full flex-wrap gap-4">
               <button
                 onClick={onViewPortfolio}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 flex items-center space-x-2"
+                className="bg-blue-600 text-white px-8 py-3 w-full sm:w-fit justify-center rounded-lg font-medium hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 flex items-center space-x-2"
               >
                 <span>{viewPortfolioLabel}</span>
                 <ExternalLink size={16} />
               </button>
               <button
                 onClick={onGetInTouch}
-                className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg font-medium hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
+                className="border-2 border-gray-300 w-full sm:w-fit justify-center dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg font-medium hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
               >
                 {getInTouchLabel}
               </button>
             </div>
 
             {/* Contact Info */}
-            <div className="flex items-center space-x-6 text-gray-600 dark:text-gray-400">
+            <div className="flex flex-col sm:flex-row items-center space-x-6 text-gray-600 dark:text-gray-400">
               <a
                 href={`mailto:${email}`}
                 className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -67,10 +67,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Illustration */}
-          <div className="lg:flex justify-center">
+          <div className="flex justify-center">
             <div className="relative">
               <div className="w-80 h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                <div className="w-72 h-72 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
+                <div className="w-35 w-72 h-35 h-72 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
                   <Code size={120} className="text-blue-600" />
                 </div>
               </div>
